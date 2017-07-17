@@ -16,7 +16,7 @@ Image exposes a compile target volume under `/dist`, so you can mount a host dir
 docker run -it --rm -v $PWD/putty-binaries:/dist putty-builder:latest
 ```
 
-#### Credits
+### Credits
 
 PuTTY: Simon Tatham (http://www.chiark.greenend.org.uk/~sgtatham/putty/)  
 PuTTY for win32 storing configuration into file: Jakub Kotrla (http://jakub.kotrla.net/putty/)  
