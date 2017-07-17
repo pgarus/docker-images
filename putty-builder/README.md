@@ -2,7 +2,7 @@
 
 Dockerfile for building win32 version of PuTTY (with configfile patch by Jakub Kotrla) on Linux (or any other Docker host). Optionally you can use patch by yumeyao to fix ugly looking Cleartype fonts in bold and italic.
 
-### Building the container
+### Building the image
 
 ```console
 docker build -t putty-builder:latest .
