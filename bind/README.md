@@ -15,9 +15,7 @@ $ docker run -p 53:53 \
 	pgarus/bind:latest
 ```
 
-### Config files examples
-
-named.conf.custom:
+##### named.conf.custom example:
 
 ```
 logging {
@@ -26,7 +24,7 @@ logging {
 };
 ```
 
-named.conf.zones:
+##### named.conf.zones example:
 
 ```
 zone "example.com" IN {
