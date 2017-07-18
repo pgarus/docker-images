@@ -4,16 +4,18 @@ Dockerfile for building win32 version of PuTTY (with configfile patch by Jakub K
 
 ### Building the image
 
-```console
-docker build -t putty-builder:latest .
+```shell
+$ docker build -t putty-builder:latest .
 ```
 
 ### Running the container
 
 Image exposes a compile target volume under `/dist`, so you can mount a host directory to that point to access compiled binary files.
 
-```console
-docker run -it --rm -v $PWD/putty-binaries:/dist putty-builder:latest
+```shell
+$ docker run -it --rm \
+	-v $PWD/putty-binaries:/dist \
+	putty-builder:latest
 ```
 
 ### Credits
