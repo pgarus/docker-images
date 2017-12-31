@@ -1,10 +1,10 @@
-FROM debian:jessie-slim
+FROM debian:stretch-slim
 
 RUN set -ex \
 	\
-	&& echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list \
+	&& echo "deb http://ftp.debian.org/debian stretch-backports main" > /etc/apt/sources.list.d/stretch-backports.list \
 	&& apt-get update \
-	&& apt-get install -y -t jessie-backports certbot \
+	&& apt-get install -y -t stretch-backports certbot \
 	&& apt-get install -y --no-install-recommends cron \
 	&& apt-get clean -y \
 	&& rm -rf /var/lib/apt/lists/* \
