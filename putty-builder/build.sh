@@ -1,7 +1,7 @@
 #!/bin/bash
 
-read -e -p "PuTTY source link: " -i "https://the.earth.li/~sgtatham/putty/0.70/putty-0.70.tar.gz" PUTTY_SRC_LINK
-read -e -p "Jakub Kotrla patched PuTTY link: " -i "http://jakub.kotrla.net/putty/portable_putty_068_0.11.0_all_in_one.zip" PUTTY_FILECONFIG_LINK
+read -e -p "PuTTY source link: " -i "https://the.earth.li/~sgtatham/putty/0.71/putty-0.71.tar.gz" PUTTY_SRC_LINK
+read -e -p "Jakub Kotrla patched PuTTY link: " -i "http://jakub.kotrla.net/putty/portable_putty_071_0.13.0_all_in_one.zip" PUTTY_FILECONFIG_LINK
 read -e -p "Use additional patches? [yN] " -n 1 USE_PATCHES
 
 set -ex

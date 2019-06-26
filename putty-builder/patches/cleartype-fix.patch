@@ -1,8 +1,8 @@
 Patch to fix ugly looking cleartype fonts in bold/italic/etc. by yumeyao.
 https://github.com/yumeyao/PuTTY/commit/d00925e62edb71cc09688cfbc7d0894a1e691a41#diff-a084b794bc0759e7a6b77810e01874f2
---- old/windows/window.c	2017-04-04 09:59:11.088799500 +0000
-+++ new/windows/window.c	2017-04-04 10:07:04.928168400 +0000
-@@ -1435,6 +1435,8 @@
+--- old/windows/window.c	2019-03-16 12:26:39.000000000 +0100
++++ new/windows/window.c	2019-06-26 09:59:30.153529900 +0200
+@@ -1483,6 +1483,8 @@
      return ret;
  }
  
@@ -11,7 +11,7 @@ https://github.com/yumeyao/PuTTY/commit/d00925e62edb71cc09688cfbc7d0894a1e691a41
  /*
   * Initialise all the fonts we will need initially. There may be as many as
   * three or as few as one.  The other (potentially) twenty-one fonts are done
-@@ -1491,11 +1493,12 @@
+@@ -1539,11 +1541,12 @@
  		-MulDiv(font_height, GetDeviceCaps(hdc, LOGPIXELSY), 72);
  	}
      }
@@ -21,23 +21,23 @@ https://github.com/yumeyao/PuTTY/commit/d00925e62edb71cc09688cfbc7d0894a1e691a41
  
      quality = conf_get_int(conf, CONF_font_quality);
  #define f(i,c,w,u) \
--    fonts[i] = CreateFont (font_height, font_width, 0, 0, w, FALSE, u, FALSE, \
-+    fonts[i] = CreateFont (font_height_local, font_width_local, 0, 0, w, FALSE, u, FALSE, \
+-    fonts[i] = CreateFont (font_height, font_width, 0, 0, w, false, u, false, \
++    fonts[i] = CreateFont (font_height_local, font_width_local, 0, 0, w, false, u, false, \
  			   c, OUT_DEFAULT_PRECIS, \
  		           CLIP_DEFAULT_PRECIS, FONT_QUALITY(quality), \
  			   FIXED_PITCH | FF_DONTCARE, font->name)
-@@ -1636,7 +1639,7 @@
+@@ -1687,7 +1690,7 @@
  {
      int basefont;
      int fw_dontcare, fw_bold, quality;
--    int c, u, w, x;
-+    int c, u, w, x, h;
+-    int c, w, x;
++    int c, w, x, h;
+     bool u;
      char *s;
      FontSpec *font;
- 
-@@ -1661,12 +1664,21 @@
+@@ -1713,12 +1716,21 @@
      w = fw_dontcare;
-     u = FALSE;
+     u = false;
      s = font->name;
 -    x = font_width;
 +    x = font_width_local;
@@ -62,12 +62,12 @@ https://github.com/yumeyao/PuTTY/commit/d00925e62edb71cc09688cfbc7d0894a1e691a41
      if (fontno & FONT_OEM)
  	c = OEM_CHARSET;
      if (fontno & FONT_BOLD)
-@@ -1677,7 +1689,7 @@
+@@ -1729,7 +1741,7 @@
      quality = conf_get_int(conf, CONF_font_quality);
  
      fonts[fontno] =
 -	CreateFont(font_height * (1 + !!(fontno & FONT_HIGH)), x, 0, 0, w,
 +	CreateFont(h, x, 0, 0, w,
- 		   FALSE, u, FALSE, c, OUT_DEFAULT_PRECIS,
+ 		   false, u, false, c, OUT_DEFAULT_PRECIS,
  		   CLIP_DEFAULT_PRECIS, FONT_QUALITY(quality),
  		   DEFAULT_PITCH | FF_DONTCARE, s);
