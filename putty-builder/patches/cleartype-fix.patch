@@ -12,8 +12,8 @@ https://github.com/yumeyao/PuTTY/commit/d00925e62edb71cc09688cfbc7d0894a1e691a41
   * Initialise all the fonts we will need initially. There may be as many as
   * three or as few as one.  The other (potentially) twenty-one fonts are done
 @@ -1539,11 +1541,12 @@
- 		-MulDiv(font_height, GetDeviceCaps(hdc, LOGPIXELSY), 72);
- 	}
+                 -MulDiv(font_height, GetDeviceCaps(hdc, LOGPIXELSY), 72);
+         }
      }
 -    font_width = pick_width;
 +    font_width = font_width_local = pick_width;
@@ -23,9 +23,9 @@ https://github.com/yumeyao/PuTTY/commit/d00925e62edb71cc09688cfbc7d0894a1e691a41
  #define f(i,c,w,u) \
 -    fonts[i] = CreateFont (font_height, font_width, 0, 0, w, false, u, false, \
 +    fonts[i] = CreateFont (font_height_local, font_width_local, 0, 0, w, false, u, false, \
- 			   c, OUT_DEFAULT_PRECIS, \
- 		           CLIP_DEFAULT_PRECIS, FONT_QUALITY(quality), \
- 			   FIXED_PITCH | FF_DONTCARE, font->name)
+                            c, OUT_DEFAULT_PRECIS, \
+                            CLIP_DEFAULT_PRECIS, FONT_QUALITY(quality), \
+                            FIXED_PITCH | FF_DONTCARE, font->name)
 @@ -1687,7 +1690,7 @@
  {
      int basefont;

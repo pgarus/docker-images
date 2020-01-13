@@ -1,7 +1,8 @@
 #!/bin/bash
 
-read -e -p "PuTTY source link: " -i "https://the.earth.li/~sgtatham/putty/0.71/putty-0.71.tar.gz" PUTTY_SRC_LINK
-read -e -p "Jakub Kotrla patched PuTTY link: " -i "http://jakub.kotrla.net/putty/portable_putty_071_0.13.0_all_in_one.zip" PUTTY_FILECONFIG_LINK
+PUTTY_SRC_LINK="https://the.earth.li/~sgtatham/putty/0.73/putty-0.73.tar.gz"
+PUTTY_FILECONFIG_LINK="http://jakub.kotrla.net/putty/portable_putty_073_0.15.0_all_in_one.zip"
+
 read -e -p "Use additional patches? [yN] " -n 1 USE_PATCHES
 
 set -ex
@@ -18,15 +19,19 @@ cd fileconfig
 
 curl -O "$PUTTY_FILECONFIG_LINK"
 unzip *.zip
-cp winpgnt.c winstore.c ../$PUTTY_DIR_NAME/windows
 
+cd `ls -d */ | head -n1`
+
+cp winpgnt.c winstore.c ../../$PUTTY_DIR_NAME/windows
+
+cd ..
 cd ..
 rm -rf fileconfig
 
 cd $PUTTY_DIR_NAME
 
 if [ "${USE_PATCHES,,}" == "y" ]; then
-	ls -1 ../patches/*.patch | xargs -I{} sh -c "cat {} | patch -p1"
+	ls -1 ../patches/*.patch | xargs -I{} sh -c "cat {} | patch -p1 -l"
 fi
 
 ./mkfiles.pl
