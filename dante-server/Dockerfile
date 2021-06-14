@@ -1,9 +1,8 @@
-FROM alpine:3.9
+FROM alpine:3.12
 
 RUN set -ex \
 	\
-	&& echo "@testing http://nl.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories \
-	&& apk --no-cache add dante-server@testing
+	&& apk --no-cache add dante-server
 
 COPY sockd.conf /etc/sockd.conf
 
