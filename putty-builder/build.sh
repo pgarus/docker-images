@@ -1,7 +1,7 @@
 #!/bin/bash
 
-PUTTY_SRC_LINK="https://the.earth.li/~sgtatham/putty/0.73/putty-0.73.tar.gz"
-PUTTY_FILECONFIG_LINK="http://jakub.kotrla.net/putty/portable_putty_073_0.15.0_all_in_one.zip"
+PUTTY_SRC_LINK="https://the.earth.li/~sgtatham/putty/0.76/putty-0.76.tar.gz"
+PUTTY_FILECONFIG_LINK="http://jakub.kotrla.net/putty/portable_putty_076_0.18.0_all_in_one.zip"
 
 read -e -p "Use additional patches? [yN] " -n 1 USE_PATCHES
 
