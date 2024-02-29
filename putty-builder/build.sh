@@ -1,7 +1,7 @@
 #!/bin/bash
 
-PUTTY_SRC_LINK="https://the.earth.li/~sgtatham/putty/0.76/putty-0.76.tar.gz"
-PUTTY_FILECONFIG_LINK="http://jakub.kotrla.net/putty/portable_putty_076_0.18.0_all_in_one.zip"
+PUTTY_SRC_LINK="https://the.earth.li/~sgtatham/putty/0.80/putty-0.80.tar.gz"
+PUTTY_FILECONFIG_LINK="https://jakub.kotrla.net/putty/portable_putty_080_0.22.0_all_in_one.zip"
 
 read -e -p "Use additional patches? [yN] " -n 1 USE_PATCHES
 
@@ -22,7 +22,7 @@ unzip *.zip
 
 cd `ls -d */ | head -n1`
 
-cp winpgnt.c winstore.c ../../$PUTTY_DIR_NAME/windows
+cp *.c ../../$PUTTY_DIR_NAME/windows
 
 cd ..
 cd ..
@@ -34,13 +34,8 @@ if [ "${USE_PATCHES,,}" == "y" ]; then
 	ls -1 ../patches/*.patch | xargs -I{} sh -c "cat {} | patch -p1 -l"
 fi
 
-./mkfiles.pl
+cmake . -DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-mingw.cmake
+cmake --build . --parallel 4
 
-cd windows
-
-make -f Makefile.mgw
 mv *.exe /dist
-
-cd /build
-rm -rf $PUTTY_DIR_NAME
 

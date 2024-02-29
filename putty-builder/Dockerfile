@@ -1,22 +1,17 @@
-FROM debian:jessie-slim
+FROM debian:bookworm-slim
 
 RUN set -ex \
 	\
 	&& apt-get update \
 	&& apt-get install -y \
+		cmake \
 		curl \
-		gcc-mingw-w64-i686 \
-		libdigest-sha-perl \
-		make \
+		gcc-mingw-w64-x86-64 \
 		patch \
-		perl \
 		unzip \
 	\
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* \
-	\
-	&& ln -s /usr/bin/i686-w64-mingw32-gcc /usr/bin/gcc \
-	&& ln -s /usr/bin/i686-w64-mingw32-windres /usr/bin/windres \
 	\
 	&& mkdir -p /build /dist
 
